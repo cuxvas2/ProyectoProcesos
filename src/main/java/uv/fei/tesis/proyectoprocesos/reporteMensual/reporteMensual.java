@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package uv.fei.tesis.proyectoprocesos.reporteMensual;
+import uv.fei.tesis.proyectoprocesos.dataaccess.*;
 
 /**
  *
@@ -15,6 +16,9 @@ public class reporteMensual extends javax.swing.JFrame {
      */
     public reporteMensual() {
         initComponents();
+        if (!"Area".equals(CB_area.getSelectedItem().toString()) && !"Mes".equals(CB_mes.getSelectedItem().toString())&& !"Anio".equals(CB_anio.getSelectedItem().toString())) {
+            B_buscar.setEnabled(true);
+        }
     }
 
     /**
@@ -34,8 +38,8 @@ public class reporteMensual extends javax.swing.JFrame {
         CB_mes = new javax.swing.JComboBox<>();
         CB_area = new javax.swing.JComboBox<>();
         CB_anio = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        B_buscar = new javax.swing.JButton();
+        B_regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,20 +63,20 @@ public class reporteMensual extends javax.swing.JFrame {
         CB_anio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CB_anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Anio", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010" }));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("BUSCAR");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        B_buscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        B_buscar.setText("BUSCAR");
+        B_buscar.setEnabled(false);
+        B_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                B_buscarActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("REGRESAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        B_regresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        B_regresar.setText("REGRESAR");
+        B_regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                B_regresarActionPerformed(evt);
             }
         });
 
@@ -99,8 +103,8 @@ public class reporteMensual extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(B_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(B_regresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -119,9 +123,9 @@ public class reporteMensual extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CB_area, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(B_buscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(B_regresar)
                 .addGap(20, 20, 20))
         );
 
@@ -156,13 +160,13 @@ public class reporteMensual extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void B_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_buscarActionPerformed
+        
+    }//GEN-LAST:event_B_buscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void B_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B_regresarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_B_regresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,11 +204,11 @@ public class reporteMensual extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton B_buscar;
+    private javax.swing.JButton B_regresar;
     private javax.swing.JComboBox<String> CB_anio;
     private javax.swing.JComboBox<String> CB_area;
     private javax.swing.JComboBox<String> CB_mes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
