@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class DataBaseConnection {
     private Connection connection;
-    private final String DB = "jdbc:mysql://127.0.0.1/tesisdb";
+    private final String DB = "jdbc:mysql://localhost:3306/tesisdb";
     private final String USUARIO = "Tesista";
     private final String CONTRASENA = "Procesos";
 
