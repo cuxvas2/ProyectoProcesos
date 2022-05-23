@@ -138,19 +138,7 @@ public class Proyecto {
         return getDescripcionDelTema() != null ? getDescripcionDelTema().equals(proyecto.getDescripcionDelTema()) : proyecto.getDescripcionDelTema() == null;
     }
 
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getNombreEsponente() != null ? getNombreEsponente().hashCode() : 0);
-        result = 31 * result + (getNombreDirector() != null ? getNombreDirector().hashCode() : 0);
-        result = 31 * result + (getSinodales() != null ? getSinodales().hashCode() : 0);
-        result = 31 * result + (getNomnreDeProyecto() != null ? getNomnreDeProyecto().hashCode() : 0);
-        result = 31 * result + (getFechaEnQueSeTitulo() != null ? getFechaEnQueSeTitulo().hashCode() : 0);
-        result = 31 * result + (getDescripcionDelTema() != null ? getDescripcionDelTema().hashCode() : 0);
-        result = 31 * result + getIdTipoDeProyecto();
-        result = 31 * result + getIdCarrera();
-        return result;
-    }
+
 
     @Override
     public String toString() {
