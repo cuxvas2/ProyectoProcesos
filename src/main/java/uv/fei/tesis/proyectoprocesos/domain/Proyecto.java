@@ -1,5 +1,8 @@
 package uv.fei.tesis.proyectoprocesos.domain;
 
+
+import java.sql.Date;
+
 public class Proyecto {
     int id;
     private String nombreExponente;
