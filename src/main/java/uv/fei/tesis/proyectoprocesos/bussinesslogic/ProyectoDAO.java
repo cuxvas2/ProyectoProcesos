@@ -4,10 +4,7 @@ import org.apache.log4j.Logger;
 import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ProyectoDAO implements IProyectoDAO{
     private final Logger LOG = Logger.getLogger(ProyectoDAO.class);
@@ -15,7 +12,31 @@ public class ProyectoDAO implements IProyectoDAO{
 
     @Override
     public boolean agregarProyecto(Proyecto proyecto) {
-        return false;
+        boolean bandera = false;
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        try (Connection connection = dataBaseConnection.getConnection()){
+            String query = "INSERT INTO proyecto VALUES (NULL,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,proyecto.getNombreExponente());
+            statement.setString(2,proyecto.getNombreDirector());
+            statement.setString(3,proyecto.getSinodales());
+            statement.setString(4,proyecto.getNombreDeProyecto());
+            statement.setString(5,proyecto.getFechaEnQueSeTitulo());
+            statement.setString(6,proyecto.getDescripcionDelTema());
+            statement.setInt(7,proyecto.getIdTipoDeProyecto());
+            statement.setInt(8,proyecto.getIdCarrera());
+            int resultSet = statement.executeUpdate();
+            if (resultSet == 0){
+                throw new SQLException("No se ha podido registrar proyecto con nombre " + proyecto.getNombreDeProyecto());
+            } else {
+                bandera = true;
+            }
+        }catch (SQLException ex){
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return bandera;
     }
 
     @Override
@@ -48,7 +69,7 @@ public class ProyectoDAO implements IProyectoDAO{
         String nombreDirector = "";
         String sinodales = "";
         String nomnreDeProyecto = "";
-        String fechaEnQueSeTitulo = "";
+        String fechaEnQueSeTitulo = null;
         String descripcionDelTema = "";
         int idTipoDeProyecto =  0;
         int idCarrera = 0;

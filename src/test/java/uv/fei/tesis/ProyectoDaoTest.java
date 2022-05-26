@@ -14,7 +14,7 @@ public class ProyectoDaoTest {
     @Before
     public void inicio(){
         proyectoDAO = new ProyectoDAO();
-        proyecto = new Proyecto(1,"Paulo","Jose","Maria","Mariposas in Isof","12-12","las mariposas un suceso extraño",1,1);
+        proyecto = new Proyecto(1,"Paulo","Jose","Maria","Mariposas in Isof","2002-12-20","las mariposas un suceso extraño",1,1);
     }
 
     @Test
