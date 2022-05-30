@@ -8,13 +8,9 @@ import java.util.logging.Logger;
 
 public class DataBaseConnection {
     private Connection connection;
-    private final String DB = "jdbc:mysql://127.0.0.1/tesisdb";
-    private final String DB2 = "jdbc:mysql://localhost:3306/id18993546_tesisdb";
-
+    private final String DB = "jdbc:mysql://localhost:3306/tesisdb";
     private final String USUARIO = "Tesista";
-    private final String USUARIO2 = "Tesista";
-    private final String CONTRASENA2 = "Procesos";
-    private final String CONTRASENA = "Procesos1234*";
+    private final String CONTRASENA = "Procesos";
 
     public Connection getConnection() throws SQLException {
         connect();
@@ -22,7 +18,7 @@ public class DataBaseConnection {
     }
 
     private void connect() throws SQLException {
-        connection = DriverManager.getConnection(DB2, USUARIO2, CONTRASENA2);
+        connection = DriverManager.getConnection(DB, USUARIO, CONTRASENA);
     }
 
     public void cerrarConexion() {

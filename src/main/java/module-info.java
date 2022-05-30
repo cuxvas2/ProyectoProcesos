@@ -2,8 +2,7 @@ module uv.fei.tesis.proyectoprocesos {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires java.desktop;
-    requires java.logging;
+    requires log4j;
 
 
     exports uv.fei.tesis.proyectoprocesos.main;

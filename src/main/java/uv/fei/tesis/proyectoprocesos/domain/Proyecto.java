@@ -2,45 +2,37 @@ package uv.fei.tesis.proyectoprocesos.domain;
 
 public class Proyecto {
     int id;
-    private String nombreEsponente;
+    private String nombreExponente;
     private String nombreDirector;
     private String sinodales;
-    private String nomnreDeProyecto;
+    private String nombreDeProyecto;
     private String fechaEnQueSeTitulo;
     private String descripcionDelTema;
     int idTipoDeProyecto;
     int idCarrera;
 
-    public Proyecto(String nombreEsponente, String nombreDirector, String sinodales, String nomnreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema) {
-        this.nombreEsponente = nombreEsponente;
-        this.nombreDirector = nombreDirector;
-        this.sinodales = sinodales;
-        this.nomnreDeProyecto = nomnreDeProyecto;
-        this.fechaEnQueSeTitulo = fechaEnQueSeTitulo;
-        this.descripcionDelTema = descripcionDelTema;
-    }
-
-    public Proyecto(int id, String nombreEsponente, String nombreDirector, String sinodales, String nomnreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
+    public Proyecto(int id, String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
         this.id = id;
-        this.nombreEsponente = nombreEsponente;
+        this.nombreExponente = nombreExponente;
         this.nombreDirector = nombreDirector;
         this.sinodales = sinodales;
-        this.nomnreDeProyecto = nomnreDeProyecto;
+        this.nombreDeProyecto = nombreDeProyecto;
         this.fechaEnQueSeTitulo = fechaEnQueSeTitulo;
         this.descripcionDelTema = descripcionDelTema;
         this.idTipoDeProyecto = idTipoDeProyecto;
         this.idCarrera = idCarrera;
     }
 
-    public Proyecto(String nombreEsponente, String nombreDirector, String sinodales, String nomnreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
-        this.nombreEsponente = nombreEsponente;
+    public Proyecto(String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema) {
+        this.nombreExponente = nombreExponente;
         this.nombreDirector = nombreDirector;
         this.sinodales = sinodales;
-        this.nomnreDeProyecto = nomnreDeProyecto;
+        this.nombreDeProyecto = nombreDeProyecto;
         this.fechaEnQueSeTitulo = fechaEnQueSeTitulo;
         this.descripcionDelTema = descripcionDelTema;
-        this.idTipoDeProyecto = idTipoDeProyecto;
-        this.idCarrera = idCarrera;
+    }
+
+    public Proyecto() {
     }
 
     public int getId() {
@@ -51,12 +43,12 @@ public class Proyecto {
         this.id = id;
     }
 
-    public String getNombreEsponente() {
-        return nombreEsponente;
+    public String getNombreExponente() {
+        return nombreExponente;
     }
 
-    public void setNombreEsponente(String nombreEsponente) {
-        this.nombreEsponente = nombreEsponente;
+    public void setNombreExponente(String nombreExponente) {
+        this.nombreExponente = nombreExponente;
     }
 
     public String getNombreDirector() {
@@ -75,12 +67,12 @@ public class Proyecto {
         this.sinodales = sinodales;
     }
 
-    public String getNomnreDeProyecto() {
-        return nomnreDeProyecto;
+    public String getNombreDeProyecto() {
+        return nombreDeProyecto;
     }
 
-    public void setNomnreDeProyecto(String nomnreDeProyecto) {
-        this.nomnreDeProyecto = nomnreDeProyecto;
+    public void setNombreDeProyecto(String nombreDeProyecto) {
+        this.nombreDeProyecto = nombreDeProyecto;
     }
 
     public String getFechaEnQueSeTitulo() {
@@ -113,57 +105,5 @@ public class Proyecto {
 
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Proyecto)) return false;
-
-        Proyecto proyecto = (Proyecto) o;
-
-        if (getId() != proyecto.getId()) return false;
-        if (getIdTipoDeProyecto() != proyecto.getIdTipoDeProyecto()) return false;
-        if (getIdCarrera() != proyecto.getIdCarrera()) return false;
-        if (getNombreEsponente() != null ? !getNombreEsponente().equals(proyecto.getNombreEsponente()) : proyecto.getNombreEsponente() != null)
-            return false;
-        if (getNombreDirector() != null ? !getNombreDirector().equals(proyecto.getNombreDirector()) : proyecto.getNombreDirector() != null)
-            return false;
-        if (getSinodales() != null ? !getSinodales().equals(proyecto.getSinodales()) : proyecto.getSinodales() != null)
-            return false;
-        if (getNomnreDeProyecto() != null ? !getNomnreDeProyecto().equals(proyecto.getNomnreDeProyecto()) : proyecto.getNomnreDeProyecto() != null)
-            return false;
-        if (getFechaEnQueSeTitulo() != null ? !getFechaEnQueSeTitulo().equals(proyecto.getFechaEnQueSeTitulo()) : proyecto.getFechaEnQueSeTitulo() != null)
-            return false;
-        return getDescripcionDelTema() != null ? getDescripcionDelTema().equals(proyecto.getDescripcionDelTema()) : proyecto.getDescripcionDelTema() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getNombreEsponente() != null ? getNombreEsponente().hashCode() : 0);
-        result = 31 * result + (getNombreDirector() != null ? getNombreDirector().hashCode() : 0);
-        result = 31 * result + (getSinodales() != null ? getSinodales().hashCode() : 0);
-        result = 31 * result + (getNomnreDeProyecto() != null ? getNomnreDeProyecto().hashCode() : 0);
-        result = 31 * result + (getFechaEnQueSeTitulo() != null ? getFechaEnQueSeTitulo().hashCode() : 0);
-        result = 31 * result + (getDescripcionDelTema() != null ? getDescripcionDelTema().hashCode() : 0);
-        result = 31 * result + getIdTipoDeProyecto();
-        result = 31 * result + getIdCarrera();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Proyecto{" +
-                "id=" + id +
-                ", nombreEsponente='" + nombreEsponente + '\'' +
-                ", nombreDirector='" + nombreDirector + '\'' +
-                ", sinodales='" + sinodales + '\'' +
-                ", nomnreDeProyecto='" + nomnreDeProyecto + '\'' +
-                ", fechaEnQueSeTitulo='" + fechaEnQueSeTitulo + '\'' +
-                ", descripcionDelTema='" + descripcionDelTema + '\'' +
-                ", idTipoDeProyecto=" + idTipoDeProyecto +
-                ", idCarrera=" + idCarrera +
-                '}';
     }
 }

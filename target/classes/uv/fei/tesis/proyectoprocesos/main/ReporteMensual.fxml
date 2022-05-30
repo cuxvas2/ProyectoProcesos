@@ -21,7 +21,6 @@
         <columns>
           <TableColumn fx:id="tf_titulo" prefWidth="137.0" text="Titulo" />
           <TableColumn fx:id="tf_fecha" editable="false" prefWidth="95.0" resizable="false" sortable="false" text="Fecha" />
-            <TableColumn fx:id="tf_carrera" editable="false" prefWidth="143.0" sortable="false" text="Carrera" />
             <TableColumn fx:id="tf_director" prefWidth="149.0" text="Director" />
             <TableColumn fx:id="tf_tesista" prefWidth="137.0" text="Tesista" />
         </columns>
