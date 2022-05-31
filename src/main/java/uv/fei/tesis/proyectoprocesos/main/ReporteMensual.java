@@ -7,9 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
-import uv.fei.tesis.proyectoprocesos.main.table.Reporte;
-import uv.fei.tesis.proyectoprocesos.main.table.TablaReporte;
 
 import java.net.URL;
 import java.sql.*;
@@ -28,16 +27,11 @@ public class ReporteMensual implements Initializable {
     private TextField _tf_director;
     private TextField _tf_tesista;
 
-    public TableView<TablaReporte> table_reporte;
     public TableColumn tf_titulo;
     public TableColumn tf_fecha;
     public TableColumn tf_carrera;
     public TableColumn tf_director;
     public TableColumn tf_tesista;
-
-    DataBaseConnection coneccion1;
-    ObservableList<TablaReporte> tableReporte;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -98,89 +92,52 @@ public class ReporteMensual implements Initializable {
             bt_Buscar.setDisable(false);
         }
     }
-    public String fecha(int dia){
+    public String fecha(){
         String formato = null;
         switch (cb_mes.getValue()){
             case "Enero":
-                formato=cb_anio.getValue()+"-01";
+                formato=cb_anio.getValue()+"01";
                 break;
             case "Febrero":
-                formato=cb_anio.getValue()+"-02";
+                formato=cb_anio.getValue()+"02";
                 break;
             case "Marzo":
-                formato=cb_anio.getValue()+"-03";
+                formato=cb_anio.getValue()+"03";
                 break;
             case "Abril":
-                formato=cb_anio.getValue()+"-04";
+                formato=cb_anio.getValue()+"04";
                 break;
             case "Mayo":
-                formato=cb_anio.getValue()+"-05";
+                formato=cb_anio.getValue()+"05";
                 break;
             case "Junio":
-                formato=cb_anio.getValue()+"-06";
+                formato=cb_anio.getValue()+"06";
                 break;
             case "Julio":
-                formato=cb_anio.getValue()+"-07";
+                formato=cb_anio.getValue()+"07";
                 break;
             case "Agosto":
-                formato=cb_anio.getValue()+"-08";
+                formato=cb_anio.getValue()+"08";
                 break;
             case "Septiembre":
-                formato=cb_anio.getValue()+"-09";
+                formato=cb_anio.getValue()+"09";
                 break;
             case "Octubre":
-                formato=cb_anio.getValue()+"-10";
+                formato=cb_anio.getValue()+"10";
                 break;
             case "Noviembre":
-                formato=cb_anio.getValue()+"-11";
+                formato=cb_anio.getValue()+"11";
                 break;
             case "Diciembre":
-                formato=cb_anio.getValue()+"-12";
+                formato=cb_anio.getValue()+"12";
                 break;
-        }
-        if (dia <10){
-            formato=formato+"-0"+dia;
-        }else {
-            formato=formato+"-"+dia;
         }
         return formato;
     }
 
     public void click(ActionEvent actionEvent) throws SQLException {
-        tableReporte= FXCollections.observableArrayList();
-        ReporteMensual.LlenarInf(coneccion1.getConnection(),tableReporte);
+        ProyectoDAO lista= new ProyectoDAO();
+        tb_database.getItems().add(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
+        ;
     }
-
-    public static void LlenarInf(Connection coneccion,
-                                 ObservableList<TablaReporte> lista) {
-        ReporteMensual rep1=null;
-        try {
-            Statement statement=coneccion.createStatement();
-            for (int i=31; i>0;i--) {
-                ResultSet resultado = statement.executeQuery(
-                        "SELECT nombreDeProyecto, " +
-                                "    fechaEnQueSeTitulo, " +
-                                "    nombreCarrera, " +
-                                "    nombreDirector, " +
-                                "    nombreExponente " +
-                                "FROM proyecto A " +
-                                "Where nombreCarrera = '" + rep1.cb_carrera.getValue() + "'" +
-                                "    fechaEnQueSeTitulo = '" + rep1.fecha(i) + "'"
-                );
-                while (resultado.next()){
-                    lista.add( new Reporte(
-                        resultado.getString("nombreDeProyecto"),
-                        resultado.getDate("fechaEnQueSeTitulo"),
-                        resultado.getString("nombreCarrera"),
-                        resultado.getString("nombreDirector"),
-                        resultado.getString("nombreExponente")
-                    ));
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
 }

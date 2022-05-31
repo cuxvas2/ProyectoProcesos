@@ -89,8 +89,6 @@ public class ProyectoDAO implements IProyectoDAO{
             dataBaseConnection.cerrarConexion();
         }
         return proyectos;
-
-
     }
 
     private Proyecto getProyecto(ResultSet resultSet) {
