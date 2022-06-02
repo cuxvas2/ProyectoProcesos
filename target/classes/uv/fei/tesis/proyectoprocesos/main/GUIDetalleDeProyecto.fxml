@@ -18,6 +18,6 @@
             <TableColumn fx:id="colCarrera" minWidth="5.5999755859375" prefWidth="132.0" text="Carrera" />
         </columns>
       </TableView>
-      <Button layoutX="851.0" layoutY="360.0" mnemonicParsing="false" text="Regresar" />
+      <Button layoutX="851.0" layoutY="360.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
    </children>
 </AnchorPane>

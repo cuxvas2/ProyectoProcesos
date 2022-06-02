@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -64,7 +65,8 @@ public class RegistrarProyectoController implements Initializable {
     }
 
     @FXML
-    private void accionRegresar(ActionEvent actionEvent) {
+    private void accionRegresar(ActionEvent actionEvent) throws IOException {
+        Utilidad.regresarMenuPrincipal(actionEvent);
         //Regresar a la ventana de menú
     }
 

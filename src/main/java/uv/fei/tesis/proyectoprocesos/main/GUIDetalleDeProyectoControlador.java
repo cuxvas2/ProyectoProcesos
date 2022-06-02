@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableView;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,5 +52,7 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
     }
 
 
-
+    public void clicRegresar(ActionEvent event) throws IOException {
+        Utilidad.regresarMenuPrincipal(event);
+    }
 }

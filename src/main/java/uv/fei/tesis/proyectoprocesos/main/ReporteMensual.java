@@ -12,6 +12,7 @@ import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -147,5 +148,9 @@ public class ReporteMensual implements Initializable {
         this.tf_fecha.setCellValueFactory(new PropertyValueFactory("fechaEnQueSeTitulo"));
         this.tf_director.setCellValueFactory(new PropertyValueFactory("nombreDirector"));
         this.tf_tesista.setCellValueFactory(new PropertyValueFactory("nombreExponente"));
+    }
+
+    public void clicRegresar(ActionEvent event) throws IOException {
+        Utilidad.regresarMenuPrincipal(event);
     }
 }
