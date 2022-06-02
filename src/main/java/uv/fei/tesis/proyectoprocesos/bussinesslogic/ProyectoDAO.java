@@ -5,6 +5,8 @@ import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProyectoDAO implements IProyectoDAO{
     private final Logger LOG = Logger.getLogger(ProyectoDAO.class);
@@ -40,6 +42,28 @@ public class ProyectoDAO implements IProyectoDAO{
     }
 
     @Override
+    public boolean eliminarProyecto(int id) {
+        boolean flag=false;
+            DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        try (Connection connection=dataBaseConnection.getConnection()){
+            String query="DELETE FROM proyecto WHERE id=?";
+            PreparedStatement statement=connection.prepareStatement(query);
+            statement.setInt(1, id);
+            int resultSet=statement.executeUpdate();
+            if (resultSet==0){
+                throw new SQLException("Educative experience couldn't be deleted");
+            }else{
+                flag = true;
+            }
+        } catch (SQLException e) {
+            LOG.warn(ProyectoDAO.class.getName(), e);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return flag;
+    }
+
+    @Override
     public Proyecto buscarProyectoPorId(int buscarId) {
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         Proyecto proyecto = new Proyecto();
@@ -60,6 +84,100 @@ public class ProyectoDAO implements IProyectoDAO{
         }
         return proyecto;
 
+    }
+
+    @Override
+    public List<String> buscarTiposProyectos() {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        List<String> listaTiposProyectos = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select tipo from tipo_proyecto;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado ningun tipo de proyecto");
+            } else {
+                String nombre = "";
+                do {
+                    nombre = resultSet.getString("tipo");
+                    listaTiposProyectos.add(nombre);
+                }while (resultSet.next());
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return listaTiposProyectos;
+    }
+
+    @Override
+    public int buscarIdProyecto(String nombre) {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        int id = 0;
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select id from tipo_proyecto where tipo = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,nombre);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado ningun id de proyecto con nombre " + nombre);
+            } else {
+                id = resultSet.getInt("id");
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return id;
+    }
+
+    @Override
+    public List<String> buscarLicenciaturas() {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        List<String> listaLicenciaturas = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select nombreCarrera from carrera;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado ninguna Carrera");
+            } else {
+                String nombre = "";
+                do {
+                    nombre = resultSet.getString("nombreCarrera");
+                    listaLicenciaturas.add(nombre);
+                }while (resultSet.next());
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return listaLicenciaturas;
+    }
+
+    @Override
+    public int buscarIdLicenciatura(String licenciatura) {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        int id = 0;
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select id from carrera where nombreCarrera = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,licenciatura);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado ningun id de licenciatura con nombre " + licenciatura);
+            } else {
+                id = resultSet.getInt("id");
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return id;
     }
 
     private Proyecto getProyecto(ResultSet resultSet) {
