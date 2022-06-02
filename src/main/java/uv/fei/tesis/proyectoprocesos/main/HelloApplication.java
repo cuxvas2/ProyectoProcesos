@@ -12,9 +12,9 @@ import java.nio.file.Paths;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("RegistarProyecto.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("GUIDetalleDeProyecto.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 870, 530);
+        stage.setTitle("Reporte Mensual");
         stage.setScene(scene);
         stage.show();
     }

@@ -1,27 +1,20 @@
 package uv.fei.tesis.proyectoprocesos.domain;
 
+import javafx.collections.ObservableArray;
 
-import java.sql.Date;
-
-public class Proyecto {
-    int id;
+public class Proyecto{
+    private int id;
     private String nombreExponente;
     private String nombreDirector;
     private String sinodales;
     private String nombreDeProyecto;
     private String fechaEnQueSeTitulo;
     private String descripcionDelTema;
-    int idTipoDeProyecto;
-    int idCarrera;
+    private int idTipoDeProyecto;
+    private int idCarrera;
+    private String tipoProyecto;
+    private String carrera;
 
-    public Proyecto(String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema) {
-        this.nombreExponente = nombreExponente;
-        this.nombreDirector = nombreDirector;
-        this.sinodales = sinodales;
-        this.nombreDeProyecto = nombreDeProyecto;
-        this.fechaEnQueSeTitulo = fechaEnQueSeTitulo;
-        this.descripcionDelTema = descripcionDelTema;
-    }
 
     public Proyecto(int id, String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
         this.id = id;
@@ -35,29 +28,17 @@ public class Proyecto {
         this.idCarrera = idCarrera;
     }
 
-    public Proyecto(String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
+    public Proyecto(String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema) {
         this.nombreExponente = nombreExponente;
         this.nombreDirector = nombreDirector;
         this.sinodales = sinodales;
         this.nombreDeProyecto = nombreDeProyecto;
         this.fechaEnQueSeTitulo = fechaEnQueSeTitulo;
         this.descripcionDelTema = descripcionDelTema;
-        this.idTipoDeProyecto = idTipoDeProyecto;
-        this.idCarrera = idCarrera;
     }
 
     public Proyecto() {
-        this.nombreExponente = "";
-        this.nombreDirector = "";
-        this.sinodales = "";
-        this.nombreDeProyecto = "";
-        this.fechaEnQueSeTitulo = "";
-        this.descripcionDelTema = "";
-        this.idTipoDeProyecto = 0;
-        this.idCarrera = 0;
     }
-
-
 
     public int getId() {
         return id;
@@ -131,30 +112,21 @@ public class Proyecto {
         this.idCarrera = idCarrera;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Proyecto)) return false;
-
-        Proyecto proyecto = (Proyecto) o;
-
-        if (getId() != proyecto.getId()) return false;
-        if (getIdTipoDeProyecto() != proyecto.getIdTipoDeProyecto()) return false;
-        if (getIdCarrera() != proyecto.getIdCarrera()) return false;
-        if (getNombreExponente() != null ? !getNombreExponente().equals(proyecto.getNombreExponente()) : proyecto.getNombreExponente() != null)
-            return false;
-        if (getNombreDirector() != null ? !getNombreDirector().equals(proyecto.getNombreDirector()) : proyecto.getNombreDirector() != null)
-            return false;
-        if (getSinodales() != null ? !getSinodales().equals(proyecto.getSinodales()) : proyecto.getSinodales() != null)
-            return false;
-        if (getNombreDeProyecto() != null ? !getNombreDeProyecto().equals(proyecto.getNombreDeProyecto()) : proyecto.getNombreDeProyecto() != null)
-            return false;
-        if (getFechaEnQueSeTitulo() != null ? !getFechaEnQueSeTitulo().equals(proyecto.getFechaEnQueSeTitulo()) : proyecto.getFechaEnQueSeTitulo() != null)
-            return false;
-        return getDescripcionDelTema() != null ? getDescripcionDelTema().equals(proyecto.getDescripcionDelTema()) : proyecto.getDescripcionDelTema() == null;
+    public String getTipoProyecto() {
+        return tipoProyecto;
     }
 
+    public void setTipoProyecto(String tipoProyecto) {
+        this.tipoProyecto = tipoProyecto;
+    }
 
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
 
     @Override
     public String toString() {
@@ -168,6 +140,8 @@ public class Proyecto {
                 ", descripcionDelTema='" + descripcionDelTema + '\'' +
                 ", idTipoDeProyecto=" + idTipoDeProyecto +
                 ", idCarrera=" + idCarrera +
+                ", tipoProyecto='" + tipoProyecto + '\'' +
+                ", carrera='" + carrera + '\'' +
                 '}';
     }
 }

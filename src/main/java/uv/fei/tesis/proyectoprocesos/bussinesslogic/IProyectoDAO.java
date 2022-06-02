@@ -13,4 +13,7 @@ public interface IProyectoDAO {
     public  List<String> buscarLicenciaturas();
     public int buscarIdLicenciatura(String licenciatura);
 
+    Proyecto buscarProyectoTipoCarreraPorId(int buscarId);
+
+    List<Proyecto> buscarProyectoPorFechaYCarrera(String añoEnQueSeTitulo, String mesEnQueSeTitulo, String nombreCarrera);
 }

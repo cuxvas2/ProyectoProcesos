@@ -83,7 +83,32 @@ public class ProyectoDAO implements IProyectoDAO{
             dataBaseConnection.cerrarConexion();
         }
         return proyecto;
-
+    }
+    @Override
+    public List<Proyecto> buscarProyectoPorFechaYCarrera(String añoEnQueSeTitulo,String mesEnQueSeTitulo, String nombreCarrera) {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        List<Proyecto> proyectos = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "SELECT A.*, " +
+                    "nombreCarrera " +
+                    "FROM proyecto A " +
+                    "INNER JOIN carrera B " +
+                    "ON A.idCarrera = B.id " +
+                    "where fechaEnQueSeTitulo LIKE ? ? and nombreCarrera like ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,añoEnQueSeTitulo + "-");
+            statement.setString(2, mesEnQueSeTitulo + "%");
+            statement.setString(3,"%" + nombreCarrera + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                proyectos.add(getProyecto(resultSet));
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return proyectos;
     }
 
     @Override
@@ -213,6 +238,77 @@ public class ProyectoDAO implements IProyectoDAO{
             proyecto.setDescripcionDelTema(descripcionDelTema);
             proyecto.setIdTipoDeProyecto(idTipoDeProyecto);
             proyecto.setIdCarrera(idCarrera);
+
+
+
+        } catch(SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        }
+        return proyecto;
+    }
+
+    @Override
+    public Proyecto buscarProyectoTipoCarreraPorId(int buscarId) {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        Proyecto proyecto = new Proyecto();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "Select * from proyecto p, tipo_proyecto tp, carrera c where p.id = ? " +
+                    "and p.idTipoProyecto = tp.id and p.idCarrera = c.id";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, buscarId);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado el proyecto con el id " + buscarId);
+            } else {
+                proyecto = getProyectoTipoCarrera(resultSet);
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return proyecto;
+    }
+    private Proyecto getProyectoTipoCarrera(ResultSet resultSet) {
+        Proyecto proyecto = new Proyecto();
+        int id = 0;
+        String nombreExponente  = "";
+        String nombreDirector;
+        String sinodales = "";
+        String nomnreDeProyecto = "";
+        String fechaEnQueSeTitulo = null;
+        String descripcionDelTema = "";
+        String tipoProyecto="";
+        String carrera="";
+        int idTipoDeProyecto =  0;
+        int idCarrera = 0;
+
+
+        try {
+            id = resultSet.getInt("id");
+            nombreExponente = resultSet.getString("nombreExponente");
+            nombreDirector = resultSet.getString("nombreDirector");
+            sinodales = resultSet.getString("sinodales");
+            nomnreDeProyecto = resultSet.getString("nombreDeProyecto");
+            fechaEnQueSeTitulo = resultSet.getString("fechaEnQueSeTitulo");
+            descripcionDelTema = resultSet.getString("descripcionDelTema");
+            idTipoDeProyecto = resultSet.getInt("idTipoProyecto");
+            idCarrera =resultSet.getInt("idCarrera");
+            tipoProyecto = resultSet.getString("tipo");
+            carrera = resultSet.getString("nombreCarrera");
+
+
+            proyecto.setId(id);
+            proyecto.setNombreExponente(nombreExponente);
+            proyecto.setNombreDirector(nombreDirector);
+            proyecto.setSinodales(sinodales);
+            proyecto.setNombreDeProyecto(nomnreDeProyecto);
+            proyecto.setFechaEnQueSeTitulo(fechaEnQueSeTitulo);
+            proyecto.setDescripcionDelTema(descripcionDelTema);
+            proyecto.setIdTipoDeProyecto(idTipoDeProyecto);
+            proyecto.setIdCarrera(idCarrera);
+            proyecto.setTipoProyecto(tipoProyecto);
+            proyecto.setCarrera(carrera);
 
 
 
