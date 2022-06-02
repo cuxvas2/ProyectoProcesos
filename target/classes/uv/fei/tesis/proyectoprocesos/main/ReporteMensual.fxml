@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uv.fei.tesis.proyectoprocesos.main.ReporteMensual">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="876.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uv.fei.tesis.proyectoprocesos.main.ReporteMensual">
    <children>
       <Button fx:id="bt_Buscar" disable="true" layoutX="71.0" layoutY="218.0" mnemonicParsing="false" onAction="#click" text="Buscar" />
       <Label layoutX="18.0" layoutY="66.0" text="Mes:" />
@@ -16,15 +16,13 @@
       <ComboBox fx:id="cb_anio" layoutX="51.0" layoutY="115.0" onAction="#Clickanio" prefHeight="25.0" prefWidth="127.0" promptText="Año" />
       <Label layoutX="16.0" layoutY="170.0" text="Label" />
       <ComboBox fx:id="cb_carrera" layoutX="51.0" layoutY="166.0" onAction="#clickcarrera" prefHeight="25.0" prefWidth="127.0" promptText="Carrera" />
-      <Button fx:id="btn_regresar" layoutX="65.0" layoutY="452.0" mnemonicParsing="false" text="Regresar" />
       <TableView fx:id="tb_database" layoutX="195.0" layoutY="56.0" prefHeight="438.0" prefWidth="662.0">
         <columns>
-          <TableColumn fx:id="tf_titulo" prefWidth="137.0" text="Titulo" />
-          <TableColumn fx:id="tf_fecha" editable="false" prefWidth="95.0" resizable="false" sortable="false" text="Fecha" />
-            <TableColumn fx:id="tf_director" prefWidth="149.0" text="Director" />
-            <TableColumn fx:id="tf_tesista" prefWidth="137.0" text="Tesista" />
+          <TableColumn fx:id="tf_titulo" prefWidth="171.0" text="Titulo" />
+          <TableColumn fx:id="tf_fecha" editable="false" prefWidth="153.0" resizable="false" sortable="false" text="Fecha" />
+            <TableColumn fx:id="tf_director" prefWidth="181.0" text="Director" />
+            <TableColumn fx:id="tf_tesista" prefWidth="156.0" text="Tesista" />
         </columns>
       </TableView>
-      <Button fx:id="btn_imprimir" layoutX="795.0" layoutY="494.0" mnemonicParsing="false" text="Imprimir" />
    </children>
 </AnchorPane>
