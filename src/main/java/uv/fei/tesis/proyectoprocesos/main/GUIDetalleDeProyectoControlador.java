@@ -40,7 +40,7 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
         this.colFechaDeProyecto.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getFechaEnQueSeTitulo()));
         this.colDirector.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDirector()));
         this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getIdCarrera()));
-        this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getSinodales()));
+        this.colProfesor.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getSinodales()));
         this.tblProyecto.setItems(proyectos);
 
     }
