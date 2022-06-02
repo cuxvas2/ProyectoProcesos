@@ -6,6 +6,7 @@ import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class ProyectoDaoTest {
     private Proyecto proyecto;
@@ -24,5 +25,9 @@ public class ProyectoDaoTest {
     @Test
     public void buscarProyectoPorFechaYCarrera(){
         System.out.println(proyectoDAO.buscarProyectoPorFechaYCarrera("2022","05","Ingenieria de sof"));
+    }
+    @Test
+    public void buscarProyectoTipoCarreraPorId(){
+        System.out.println(proyectoDAO.buscarProyectoTipoCarreraPorId(3));
     }
 }

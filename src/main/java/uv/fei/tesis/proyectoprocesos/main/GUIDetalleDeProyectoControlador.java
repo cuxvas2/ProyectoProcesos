@@ -23,14 +23,17 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
     @FXML private TableColumn<Proyecto, String> colDirector;
     @FXML private TableColumn<Proyecto, String> colCategoria;
     @FXML private TableColumn<Proyecto, String> colProfesor;
+    @FXML private TableColumn<Proyecto, String> colCarrera;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
+        Proyecto proyecto;
+        proyecto = proyectoDAO.buscarProyectoTipoCarreraPorId(3);
         ObservableList<Proyecto> listaProyectos =
-                FXCollections.observableArrayList(proyectoDAO.buscarProyectoPorFechaYCarrera("2022","05","Ingenieria de sof"));
-        System.out.println(listaProyectos.get(0));
+                FXCollections.observableArrayList();
+        listaProyectos.add(proyecto);
         observaList(listaProyectos);
     }
 
@@ -39,8 +42,9 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
         this.colDescripcion.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getDescripcionDelTema()));
         this.colFechaDeProyecto.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getFechaEnQueSeTitulo()));
         this.colDirector.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDirector()));
-        this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getIdCarrera()));
+        this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getTipoProyecto()));
         this.colProfesor.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getSinodales()));
+        this.colCarrera.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getCarrera()));
         this.tblProyecto.setItems(proyectos);
 
     }
