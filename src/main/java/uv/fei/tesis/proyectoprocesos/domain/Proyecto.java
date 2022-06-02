@@ -1,15 +1,20 @@
 package uv.fei.tesis.proyectoprocesos.domain;
 
-public class Proyecto {
-    int id;
+import javafx.collections.ObservableArray;
+
+public class Proyecto{
+    private int id;
     private String nombreExponente;
     private String nombreDirector;
     private String sinodales;
     private String nombreDeProyecto;
     private String fechaEnQueSeTitulo;
     private String descripcionDelTema;
-    int idTipoDeProyecto;
-    int idCarrera;
+    private int idTipoDeProyecto;
+    private int idCarrera;
+    private String tipoProyecto;
+    private String carrera;
+
 
     public Proyecto(int id, String nombreExponente, String nombreDirector, String sinodales, String nombreDeProyecto, String fechaEnQueSeTitulo, String descripcionDelTema, int idTipoDeProyecto, int idCarrera) {
         this.id = id;
@@ -105,5 +110,38 @@ public class Proyecto {
 
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
+    }
+
+    public String getTipoProyecto() {
+        return tipoProyecto;
+    }
+
+    public void setTipoProyecto(String tipoProyecto) {
+        this.tipoProyecto = tipoProyecto;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+    }
+
+    @Override
+    public String toString() {
+        return "Proyecto{" +
+                "id=" + id +
+                ", nombreExponente='" + nombreExponente + '\'' +
+                ", nombreDirector='" + nombreDirector + '\'' +
+                ", sinodales='" + sinodales + '\'' +
+                ", nombreDeProyecto='" + nombreDeProyecto + '\'' +
+                ", fechaEnQueSeTitulo='" + fechaEnQueSeTitulo + '\'' +
+                ", descripcionDelTema='" + descripcionDelTema + '\'' +
+                ", idTipoDeProyecto=" + idTipoDeProyecto +
+                ", idCarrera=" + idCarrera +
+                ", tipoProyecto='" + tipoProyecto + '\'' +
+                ", carrera='" + carrera + '\'' +
+                '}';
     }
 }

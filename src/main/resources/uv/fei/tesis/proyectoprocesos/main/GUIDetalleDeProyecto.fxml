@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uv.fei.tesis.proyectoprocesos.main.GUIDetalleDeProyectoControlador">
    <children>
       <TableView fx:id="tblProyecto" layoutX="25.0" layoutY="109.0" prefHeight="200.0" prefWidth="878.0">
@@ -13,12 +12,12 @@
           <TableColumn fx:id="colNombreTesis" prefWidth="124.800048828125" text="Nombre de tesis" />
           <TableColumn fx:id="colDescripcion" minWidth="5.5999755859375" prefWidth="92.0" text="Descripcion" />
             <TableColumn fx:id="colFechaDeProyecto" minWidth="5.5999755859375" prefWidth="132.0" text="Fecha de proyecto" />
-            <TableColumn fx:id="colNombreDeTesis" minWidth="5.5999755859375" prefWidth="132.0" text="Nombre de tesis" />
             <TableColumn fx:id="colDirector" minWidth="5.5999755859375" prefWidth="132.0" text="Director" />
             <TableColumn fx:id="colCategoria" minWidth="5.5999755859375" prefWidth="132.0" text="Categoria" />
             <TableColumn fx:id="colProfesor" minWidth="5.5999755859375" prefWidth="132.0" text="Profesor" />
+            <TableColumn fx:id="colCarrera" minWidth="5.5999755859375" prefWidth="132.0" text="Carrera" />
         </columns>
       </TableView>
-      <Button layoutX="851.0" layoutY="360.0" mnemonicParsing="false" text="Regresar" />
+      <Button layoutX="851.0" layoutY="360.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
    </children>
 </AnchorPane>

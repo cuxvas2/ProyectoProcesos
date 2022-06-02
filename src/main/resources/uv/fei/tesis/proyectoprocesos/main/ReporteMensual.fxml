@@ -16,6 +16,7 @@
       <ComboBox fx:id="cb_anio" layoutX="51.0" layoutY="115.0" onAction="#Clickanio" prefHeight="25.0" prefWidth="127.0" promptText="Año" />
       <Label layoutX="16.0" layoutY="170.0" text="Label" />
       <ComboBox fx:id="cb_carrera" layoutX="51.0" layoutY="166.0" onAction="#clickcarrera" prefHeight="25.0" prefWidth="127.0" promptText="Carrera" />
+      <Button layoutX="31.0" layoutY="458.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
       <TableView fx:id="tb_database" layoutX="195.0" layoutY="56.0" prefHeight="438.0" prefWidth="662.0">
         <columns>
           <TableColumn fx:id="tf_titulo" prefWidth="171.0" text="Titulo" />

@@ -12,10 +12,9 @@ import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReporteMensual implements Initializable {
@@ -31,7 +30,7 @@ public class ReporteMensual implements Initializable {
     public TableColumn tf_director;
     public TableColumn tf_tesista;
 
-
+    ObservableList<Proyecto> listaProyectos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -137,17 +136,21 @@ public class ReporteMensual implements Initializable {
     }
 
     public void click(ActionEvent actionEvent) throws SQLException {
-        List<Proyecto> listaP=new ArrayList<Proyecto>();
         tb_database.getItems().clear();
-        ProyectoDAO proyectodao = new ProyectoDAO();
-        listaP =proyectodao.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue());
-        ObservableList<Proyecto> listaProyectos=FXCollections.observableList(listaP);
+        listaProyectos.clear();
+        ProyectoDAO lista = new ProyectoDAO();
+        listaProyectos.addAll(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
         tb_database.setItems(listaProyectos);
     }
     public void configurarElementosTabla(){
+        listaProyectos=FXCollections.observableArrayList();
         this.tf_titulo.setCellValueFactory(new PropertyValueFactory("nombreDeProyecto"));
         this.tf_fecha.setCellValueFactory(new PropertyValueFactory("fechaEnQueSeTitulo"));
         this.tf_director.setCellValueFactory(new PropertyValueFactory("nombreDirector"));
         this.tf_tesista.setCellValueFactory(new PropertyValueFactory("nombreExponente"));
+    }
+
+    public void clicRegresar(ActionEvent event) throws IOException {
+        Utilidad.regresarMenuPrincipal(event);
     }
 }
