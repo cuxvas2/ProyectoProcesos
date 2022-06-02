@@ -6,8 +6,7 @@ import org.junit.Test;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class ProyectoDaoTest {
     private Proyecto proyecto;
@@ -34,5 +33,27 @@ public class ProyectoDaoTest {
     public void eliminarProyecto() {
         int id = 2;
         assertTrue(proyectoDAO.eliminarProyecto(id));
+    }
+
+    @Test
+    public void buscarTiposProyectos() {
+        assertNotNull(proyectoDAO.buscarTiposProyectos());
+    }
+
+    @Test
+    public void buscarIdProyecto() {
+        int id = 1;
+        assertEquals(proyectoDAO.buscarIdProyecto("Tesis"),id);
+    }
+
+    @Test
+    public void buscarLicenciaturas() {
+        assertNotNull(proyectoDAO.buscarLicenciaturas());
+    }
+
+    @Test
+    public void buscarIdLicenciatura() {
+        int id = 1;
+        assertEquals(proyectoDAO.buscarIdLicenciatura("Estadistica"),id);
     }
 }

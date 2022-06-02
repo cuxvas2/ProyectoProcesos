@@ -54,12 +54,11 @@ public class RegistrarProyectoController implements Initializable {
             boolean resultado = proyectoDAO.agregarProyecto(proyecto);
             if (resultado){
                 avisos("Correcto", "EL proyecto se ha registrado exitosamente.", Alert.AlertType.INFORMATION);
+                setItemsEnBlanco();
                 //Regresarlo a la pantalla anterios o dejar los campos vacios
-                System.out.println("Proyecto registrado");
             }else {
                 avisos("Error","¡Ups!, no se ha podido registrar el proyecto, estamos teniendo problemas.\n " +
                         "Vuelve a intentarlo en unos minutos", Alert.AlertType.ERROR);
-                System.out.println("Proyecto no registrado");
             }
         }
     }
@@ -110,6 +109,14 @@ public class RegistrarProyectoController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+
+    private void setItemsEnBlanco(){
+        txtNombreDirector.setText("");
+        txtNombrePresentador.setText("");
+        txtNombreDeProyecto.setText("");
+        txtSinodailes.setText("");
+        txtDescripcionTema.setText("");
     }
 
 
