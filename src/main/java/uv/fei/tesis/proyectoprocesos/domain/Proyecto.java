@@ -1,6 +1,8 @@
 package uv.fei.tesis.proyectoprocesos.domain;
 
-public class Proyecto {
+import javafx.collections.ObservableArray;
+
+public class Proyecto{
     int id;
     private String nombreExponente;
     private String nombreDirector;

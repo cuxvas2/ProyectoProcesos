@@ -1,5 +1,9 @@
 package uv.fei.tesis.proyectoprocesos.main;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -15,8 +19,7 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
     private TableView<Proyecto> tblProyecto;
     @FXML private TableColumn<Proyecto, String> colNombreTesis;
     @FXML private TableColumn<Proyecto, String> colDescripcion;
-    @FXML private TableColumn colFechaDeProyecto;
-    @FXML private TableColumn<Proyecto, String> colNombreDeTesis;
+    @FXML private TableColumn <Proyecto,String>colFechaDeProyecto;
     @FXML private TableColumn<Proyecto, String> colDirector;
     @FXML private TableColumn<Proyecto, String> colCategoria;
     @FXML private TableColumn<Proyecto, String> colProfesor;
@@ -25,8 +28,23 @@ public class GUIDetalleDeProyectoControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
-        proyectoDAO.buscarProyectoPorId(1);
+        ObservableList<Proyecto> listaProyectos =
+                FXCollections.observableArrayList(proyectoDAO.buscarProyectoPorFechaYCarrera("2022","05","Ingenieria de sof"));
+        System.out.println(listaProyectos.get(0));
+        observaList(listaProyectos);
+    }
 
+    private void observaList(ObservableList<Proyecto> proyectos) {
+        this.colNombreTesis.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDeProyecto()));
+        this.colDescripcion.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getDescripcionDelTema()));
+        this.colFechaDeProyecto.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getFechaEnQueSeTitulo()));
+        this.colDirector.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDirector()));
+        this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getIdCarrera()));
+        this.colCategoria.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getSinodales()));
+        this.tblProyecto.setItems(proyectos);
 
     }
+
+
+
 }

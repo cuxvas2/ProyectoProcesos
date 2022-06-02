@@ -138,6 +138,5 @@ public class ReporteMensual implements Initializable {
     public void click(ActionEvent actionEvent) throws SQLException {
         ProyectoDAO lista= new ProyectoDAO();
         tb_database.getItems().add(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
-        ;
     }
 }
