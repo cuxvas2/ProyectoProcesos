@@ -139,15 +139,7 @@ public class ReporteMensual implements Initializable {
     }
 
     public void click(ActionEvent actionEvent) throws SQLException {
-        //antigua version
-        /*tb_database.getItems().clear();
-        listaProyectos.clear();
-        ProyectoDAO lista = new ProyectoDAO();
-        listaProyectos.addAll(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
-        tb_database.setItems(listaProyectos);*/
-
         proyectos = proyectoDAO.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue());
-        proyectos.forEach(System.out::println);
         ObservableList<Proyecto> listaProyect = FXCollections.observableArrayList();
         listaProyect.addAll(proyectos);
         configurarElementosTabla(listaProyect);
