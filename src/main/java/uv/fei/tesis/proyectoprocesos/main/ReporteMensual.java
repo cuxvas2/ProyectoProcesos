@@ -67,13 +67,6 @@ public class ReporteMensual implements Initializable {
         cb_anio.getItems().add("2011");
         cb_anio.getItems().add("2010");
 
-        //agregar todos los add de carrera
-        /*cb_carrera.getItems().add("Estadística");
-        cb_carrera.getItems().add("Redes y Servicios de Cómputo");
-        cb_carrera.getItems().add("Tecnologías Computacionales");
-        cb_carrera.getItems().add("Ingeniería de Software");
-        cb_carrera.getItems().add("Ciencias y Técnicas Estadísticas");*/
-
         List<String> listaCarreras = new ArrayList<String>();
         listaCarreras = proyectoDAO.buscarLicenciaturas();
         ObservableList<String> observableListCarreras = FXCollections.observableList(listaCarreras);
