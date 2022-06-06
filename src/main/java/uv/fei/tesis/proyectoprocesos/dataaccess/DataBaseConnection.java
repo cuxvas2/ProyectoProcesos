@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 public class DataBaseConnection {
     private Connection connection;
     private final String DB = "jdbc:mysql://localhost:3306/tesisdb";
-    private final String USUARIO = "Tesista";
-    private final String CONTRASENA = "Procesos";
+    private final String USUARIO = "root";
+    private final String CONTRASENA = "";
 
     public Connection getConnection() throws SQLException {
         connect();
