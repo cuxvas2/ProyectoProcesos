@@ -86,6 +86,7 @@ public class ProyectoDAO implements IProyectoDAO{
     }
     @Override
     public List<Proyecto> buscarProyectoPorFechaYCarrera(String añoEnQueSeTitulo,String mesEnQueSeTitulo, String nombreCarrera) {
+
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         List<Proyecto> proyectos = new ArrayList<>();
         try (Connection connection = dataBaseConnection.getConnection()) {

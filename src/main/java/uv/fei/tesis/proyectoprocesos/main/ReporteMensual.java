@@ -29,8 +29,8 @@ public class ReporteMensual implements Initializable {
     @FXML private TableColumn<Proyecto, String> tf_director;
     @FXML private TableColumn<Proyecto, String> tf_tesista;
 
-    ProyectoDAO proyectoDAO = new ProyectoDAO();
-    List<Proyecto> proyecto;
+    public ProyectoDAO proyectoDAO = new ProyectoDAO();
+    public List<Proyecto> proyectos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
@@ -96,43 +96,43 @@ public class ReporteMensual implements Initializable {
         }
     }
     public String fecha(){
-        String formato = null;
+        String formato="";
         switch (cb_mes.getValue()){
             case "Enero":
-                formato=cb_anio.getValue()+"01";
+                formato="01";
                 break;
             case "Febrero":
-                formato=cb_anio.getValue()+"02";
+                formato="02";
                 break;
             case "Marzo":
-                formato=cb_anio.getValue()+"03";
+                formato="03";
                 break;
             case "Abril":
-                formato=cb_anio.getValue()+"04";
+                formato="04";
                 break;
             case "Mayo":
-                formato=cb_anio.getValue()+"05";
+                formato="05";
                 break;
             case "Junio":
-                formato=cb_anio.getValue()+"06";
+                formato="06";
                 break;
             case "Julio":
-                formato=cb_anio.getValue()+"07";
+                formato="07";
                 break;
             case "Agosto":
-                formato=cb_anio.getValue()+"08";
+                formato="08";
                 break;
             case "Septiembre":
-                formato=cb_anio.getValue()+"09";
+                formato="09";
                 break;
             case "Octubre":
-                formato=cb_anio.getValue()+"10";
+                formato="10";
                 break;
             case "Noviembre":
-                formato=cb_anio.getValue()+"11";
+                formato="11";
                 break;
             case "Diciembre":
-                formato=cb_anio.getValue()+"12";
+                formato="12";
                 break;
         }
         return formato;
@@ -146,11 +146,11 @@ public class ReporteMensual implements Initializable {
         listaProyectos.addAll(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
         tb_database.setItems(listaProyectos);*/
 
-        proyecto = proyectoDAO.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue());
+        proyectos = proyectoDAO.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue());
+        proyectos.forEach(System.out::println);
         ObservableList<Proyecto> listaProyect = FXCollections.observableArrayList();
-        listaProyect.add((Proyecto) proyecto);
+        listaProyect.addAll(proyectos);
         configurarElementosTabla(listaProyect);
-
     }
     public void configurarElementosTabla(ObservableList<Proyecto> proyectos){
         this.tf_titulo.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDeProyecto()));
