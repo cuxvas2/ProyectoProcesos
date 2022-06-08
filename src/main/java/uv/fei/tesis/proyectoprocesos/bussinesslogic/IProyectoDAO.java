@@ -8,6 +8,9 @@ public interface IProyectoDAO {
     public boolean agregarProyecto (Proyecto proyecto);
     public boolean eliminarProyecto (int id);
     public Proyecto buscarProyectoPorId (int buscarId);
+
+    List<Proyecto> obtenerProyectos();
+
     public List<String> buscarTiposProyectos();
     public int buscarIdProyecto(String nombre);
     public  List<String> buscarLicenciaturas();
