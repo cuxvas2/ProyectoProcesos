@@ -7,9 +7,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
+import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -21,21 +24,18 @@ public class ReporteMensual implements Initializable {
     public ComboBox<String> cb_carrera;
     public TableView tb_database;
 
-    private TextField _tf_titulo;
-    private TextField _tf_fecha;
-    private TextField _tf_carrera;
-    private TextField _tf_director;
-    private TextField _tf_tesista;
-
     public TableColumn tf_titulo;
     public TableColumn tf_fecha;
     public TableColumn tf_carrera;
     public TableColumn tf_director;
     public TableColumn tf_tesista;
 
+    ObservableList<Proyecto> listaProyectos;
+
     @Override
     public void initialize(URL url, ResourceBundle rb){
         AñadirInf();
+        configurarElementosTabla();
     }
 
     public void AñadirInf(){
@@ -136,7 +136,21 @@ public class ReporteMensual implements Initializable {
     }
 
     public void click(ActionEvent actionEvent) throws SQLException {
-        ProyectoDAO lista= new ProyectoDAO();
-        tb_database.getItems().add(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
+        tb_database.getItems().clear();
+        listaProyectos.clear();
+        ProyectoDAO lista = new ProyectoDAO();
+        listaProyectos.addAll(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
+        tb_database.setItems(listaProyectos);
+    }
+    public void configurarElementosTabla(){
+        listaProyectos=FXCollections.observableArrayList();
+        this.tf_titulo.setCellValueFactory(new PropertyValueFactory("nombreDeProyecto"));
+        this.tf_fecha.setCellValueFactory(new PropertyValueFactory("fechaEnQueSeTitulo"));
+        this.tf_director.setCellValueFactory(new PropertyValueFactory("nombreDirector"));
+        this.tf_tesista.setCellValueFactory(new PropertyValueFactory("nombreExponente"));
+    }
+
+    public void clicRegresar(ActionEvent event) throws IOException {
+        Utilidad.regresarMenuPrincipal(event);
     }
 }
