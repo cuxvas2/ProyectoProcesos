@@ -115,11 +115,11 @@ public class ProyectoDAO implements IProyectoDAO{
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         List<Proyecto> proyectos = new ArrayList<>();
         try (Connection connection = dataBaseConnection.getConnection()) {
-            String query = "SELECT * FROM tesisdb.proyecto ";
+            String query = "select p.*, tp.tipo, c.nombreCarrera from proyecto p, tipo_proyecto tp, carrera c where tp.id = p.idTipoProyecto and c.id = p.idcarrera";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                proyectos.add(getProyecto(resultSet));
+                proyectos.add(getProyectoTipoCarrera(resultSet));
             }
         } catch (SQLException ex) {
             LOG.warn(ProyectoDAO.class.getName(), ex);
