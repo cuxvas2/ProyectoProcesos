@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,9 +18,8 @@ public class Utilidad {
         Node node = (Node) actionEvent.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
-        URL url = Paths.get(direccionFxml).toUri().toURL();
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Scene scene = new Scene(fxmlLoader.load(url ), 600, 400);
+        FXMLLoader fxmlLoader = new FXMLLoader(Utilidad.class.getResource(direccionFxml));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setUserData(object);
         stage.setTitle(tituloDeLaVentana);
         stage.setScene(scene);
@@ -60,4 +60,14 @@ public class Utilidad {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
+    public static Object recuperarValoresDeLaVentanaAction(ActionEvent actionEvent){
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        return stage.getUserData();
+    }
+    public static Object recuperarValoresDeLaVentanaPanel(Pane pane){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        return stage.getUserData();
+    }
+
 }
