@@ -53,6 +53,7 @@ public class ListaDeProyectos implements Initializable {
 
     public void clicDetalleDeProyecto(ActionEvent event) {
 
+
     }
 
     public void seleccionarProyecto(MouseEvent mouseEvent) {
