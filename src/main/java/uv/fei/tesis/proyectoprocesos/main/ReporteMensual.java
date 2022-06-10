@@ -1,20 +1,20 @@
 package uv.fei.tesis.proyectoprocesos.main;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
-import uv.fei.tesis.proyectoprocesos.dataaccess.DataBaseConnection;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReporteMensual implements Initializable {
@@ -22,20 +22,19 @@ public class ReporteMensual implements Initializable {
     public ComboBox<String> cb_mes;
     public ComboBox<String> cb_anio;
     public ComboBox<String> cb_carrera;
-    public TableView tb_database;
 
-    public TableColumn tf_titulo;
-    public TableColumn tf_fecha;
-    public TableColumn tf_carrera;
-    public TableColumn tf_director;
-    public TableColumn tf_tesista;
+    @FXML private TableView<Proyecto> tb_database;
+    @FXML private TableColumn<Proyecto, String> tf_titulo;
+    @FXML private TableColumn<Proyecto, String> tf_fecha;
+    @FXML private TableColumn<Proyecto, String> tf_director;
+    @FXML private TableColumn<Proyecto, String> tf_tesista;
 
-    ObservableList<Proyecto> listaProyectos;
+    public ProyectoDAO proyectoDAO = new ProyectoDAO();
+    public List<Proyecto> proyectos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
         AñadirInf();
-        configurarElementosTabla();
     }
 
     public void AñadirInf(){
@@ -68,13 +67,10 @@ public class ReporteMensual implements Initializable {
         cb_anio.getItems().add("2011");
         cb_anio.getItems().add("2010");
 
-        //agregar todos los add de carrera
-        cb_carrera.getItems().add("Estadística");
-        cb_carrera.getItems().add("Redes y Servicios de Cómputo");
-        cb_carrera.getItems().add("Tecnologías Computacionales");
-        cb_carrera.getItems().add("Ingeniería de Software");
-        cb_carrera.getItems().add("Ciencias y Técnicas Estadísticas");
-
+        List<String> listaCarreras = new ArrayList<String>();
+        listaCarreras = proyectoDAO.buscarLicenciaturas();
+        ObservableList<String> observableListCarreras = FXCollections.observableList(listaCarreras);
+        cb_carrera.setItems(observableListCarreras);
     }
 
     public void clickmes(ActionEvent actionEvent) {
@@ -93,61 +89,64 @@ public class ReporteMensual implements Initializable {
         }
     }
     public String fecha(){
-        String formato = null;
+        String formato="";
         switch (cb_mes.getValue()){
             case "Enero":
-                formato=cb_anio.getValue()+"01";
+                formato="01";
                 break;
             case "Febrero":
-                formato=cb_anio.getValue()+"02";
+                formato="02";
                 break;
             case "Marzo":
-                formato=cb_anio.getValue()+"03";
+                formato="03";
                 break;
             case "Abril":
-                formato=cb_anio.getValue()+"04";
+                formato="04";
                 break;
             case "Mayo":
-                formato=cb_anio.getValue()+"05";
+                formato="05";
                 break;
             case "Junio":
-                formato=cb_anio.getValue()+"06";
+                formato="06";
                 break;
             case "Julio":
-                formato=cb_anio.getValue()+"07";
+                formato="07";
                 break;
             case "Agosto":
-                formato=cb_anio.getValue()+"08";
+                formato="08";
                 break;
             case "Septiembre":
-                formato=cb_anio.getValue()+"09";
+                formato="09";
                 break;
             case "Octubre":
-                formato=cb_anio.getValue()+"10";
+                formato="10";
                 break;
             case "Noviembre":
-                formato=cb_anio.getValue()+"11";
+                formato="11";
                 break;
             case "Diciembre":
-                formato=cb_anio.getValue()+"12";
+                formato="12";
                 break;
         }
         return formato;
     }
 
     public void click(ActionEvent actionEvent) throws SQLException {
-        tb_database.getItems().clear();
-        listaProyectos.clear();
-        ProyectoDAO lista = new ProyectoDAO();
-        listaProyectos.addAll(lista.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue()));
-        tb_database.setItems(listaProyectos);
+        proyectos = proyectoDAO.buscarProyectoPorFechaYCarrera(cb_anio.getValue(),fecha(),cb_carrera.getValue());
+        ObservableList<Proyecto> listaProyect = FXCollections.observableArrayList();
+        listaProyect.addAll(proyectos);
+        configurarElementosTabla(listaProyect);
     }
-    public void configurarElementosTabla(){
-        listaProyectos=FXCollections.observableArrayList();
-        this.tf_titulo.setCellValueFactory(new PropertyValueFactory("nombreDeProyecto"));
-        this.tf_fecha.setCellValueFactory(new PropertyValueFactory("fechaEnQueSeTitulo"));
-        this.tf_director.setCellValueFactory(new PropertyValueFactory("nombreDirector"));
-        this.tf_tesista.setCellValueFactory(new PropertyValueFactory("nombreExponente"));
+    public void configurarElementosTabla(ObservableList<Proyecto> proyectos){
+        this.tf_titulo.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDeProyecto()));
+        this.tf_fecha.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getFechaEnQueSeTitulo()));
+        this.tf_director.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreDirector()));
+        this.tf_tesista.setCellValueFactory(cellDataFeatures -> new ReadOnlyObjectWrapper(cellDataFeatures.getValue().getNombreExponente()));
+        this.tb_database.setItems(proyectos);
+    }
+
+    public void clicRegresar(ActionEvent event) throws IOException {
+        Utilidad.regresarMenuPrincipal(event);
     }
 
     public void clicRegresar(ActionEvent event) throws IOException {
