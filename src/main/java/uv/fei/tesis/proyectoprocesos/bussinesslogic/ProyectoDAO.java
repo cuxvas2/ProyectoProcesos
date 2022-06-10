@@ -110,6 +110,24 @@ public class ProyectoDAO implements IProyectoDAO{
         }
         return proyectos;
     }
+    @Override
+    public List<Proyecto> obtenerProyectos() {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        List<Proyecto> proyectos = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select p.*, tp.tipo, c.nombreCarrera from proyecto p, tipo_proyecto tp, carrera c where tp.id = p.idTipoProyecto and c.id = p.idcarrera";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                proyectos.add(getProyectoTipoCarrera(resultSet));
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return proyectos;
+    }
 
     @Override
     public List<String> buscarTiposProyectos() {

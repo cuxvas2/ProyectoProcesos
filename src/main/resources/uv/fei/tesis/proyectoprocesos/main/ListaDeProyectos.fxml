@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="929.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uv.fei.tesis.proyectoprocesos.main.ListaDeProyectos">
    <children>
-      <TableView fx:id="tblProyecto" layoutX="275.0" layoutY="100.0" prefHeight="200.0" prefWidth="378.0">
+      <TableView fx:id="tblProyecto" layoutX="275.0" layoutY="100.0" onMouseClicked="#seleccionarProyecto" prefHeight="200.0" prefWidth="378.0">
         <columns>
           <TableColumn fx:id="colNombreProyecto" prefWidth="124.800048828125" text="Nombre de proyecto" />
             <TableColumn fx:id="colDirector" minWidth="5.5999755859375" prefWidth="132.0" text="Director" />
@@ -15,6 +15,6 @@
         </columns>
       </TableView>
       <Button layoutX="742.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
-      <Button layoutX="593.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicDetalleDeProyecto" text="Detalle de proyecto" />
+      <Button fx:id="btnDetalleDeProyecto" layoutX="593.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicDetalleDeProyecto" text="Detalle de proyecto" />
    </children>
 </AnchorPane>
