@@ -59,7 +59,7 @@ public class RegistrarProyectoController implements Initializable {
             boolean resultado = proyectoDAO.agregarProyecto(proyecto);
             if (resultado){
                 avisos("Correcto", "EL proyecto se ha registrado exitosamente.", Alert.AlertType.INFORMATION);
-                //setItemsEnBlanco();
+                setItemsEnBlanco();
             }else {
                 avisos("Error","¡Ups!, no se ha podido registrar el proyecto, estamos teniendo problemas.\n " +
                         "Vuelve a intentarlo en unos minutos", Alert.AlertType.ERROR);

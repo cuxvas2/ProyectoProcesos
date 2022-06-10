@@ -284,7 +284,7 @@ public class ProyectoDAO implements IProyectoDAO{
             ResultSet resultSet = statement.executeQuery();
             System.out.println(resultSet.next() + " - >");
             if (!resultSet.next()) {
-                throw new SQLException("No se ha encontrado proyectos repetidos");
+                resultado = false;
             }else {
                 resultado = true;
             }
