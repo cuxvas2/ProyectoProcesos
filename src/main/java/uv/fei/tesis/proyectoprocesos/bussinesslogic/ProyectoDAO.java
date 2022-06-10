@@ -269,6 +269,33 @@ public class ProyectoDAO implements IProyectoDAO{
         }
         return proyecto;
     }
+
+    @Override
+    public boolean buscarProyectoRepetidoDePresentador(String nombrePresentador, String nombreProyeto, String nivel) {
+        boolean resultado = false;
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select p.id, p.nombreExponente, nombreCarrera from proyecto p inner join carrera c " +
+                    "on c.id = p.idCarrera where (nombreExponente = ? and nombreCarrera like ? ) or (nombreDeProyecto = ? ) ";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nombrePresentador);
+            statement.setString(2,nivel + "%");
+            statement.setString(3,nombreProyeto);
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(resultSet.next() + " - >");
+            if (!resultSet.next()) {
+                throw new SQLException("No se ha encontrado proyectos repetidos");
+            }else {
+                resultado = true;
+            }
+        } catch (SQLException ex) {
+            LOG.warn(UsuarioDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return resultado;
+    }
+
     private Proyecto getProyectoTipoCarrera(ResultSet resultSet) {
         Proyecto proyecto = new Proyecto();
         int id = 0;

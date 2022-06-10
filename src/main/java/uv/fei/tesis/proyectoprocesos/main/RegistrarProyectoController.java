@@ -7,12 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.apache.log4j.Logger;
 import uv.fei.tesis.proyectoprocesos.bussinesslogic.ProyectoDAO;
 import uv.fei.tesis.proyectoprocesos.domain.Proyecto;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +34,8 @@ public class RegistrarProyectoController implements Initializable {
     @FXML private DatePicker dateFechaTitulacion;
     @FXML private Button btnRegistrar;
 
+    private final Logger LOG = Logger.getLogger(ProyectoDAO.class);
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         añadirElementosBox();
@@ -39,7 +43,7 @@ public class RegistrarProyectoController implements Initializable {
 
     @FXML
     private void accionRegistrar(ActionEvent actionEvent) {
-        if (!itemsVacios() && validarFechaAnteriorActual()){
+        if (!itemsVacios() && validarFechaAnteriorActual() && !validarProyectoDuplicado()){
             Proyecto proyecto = new Proyecto();
             ProyectoDAO proyectoDAO = new ProyectoDAO();
 
@@ -55,8 +59,7 @@ public class RegistrarProyectoController implements Initializable {
             boolean resultado = proyectoDAO.agregarProyecto(proyecto);
             if (resultado){
                 avisos("Correcto", "EL proyecto se ha registrado exitosamente.", Alert.AlertType.INFORMATION);
-                setItemsEnBlanco();
-                //Regresarlo a la pantalla anterios o dejar los campos vacios
+                //setItemsEnBlanco();
             }else {
                 avisos("Error","¡Ups!, no se ha podido registrar el proyecto, estamos teniendo problemas.\n " +
                         "Vuelve a intentarlo en unos minutos", Alert.AlertType.ERROR);
@@ -103,6 +106,21 @@ public class RegistrarProyectoController implements Initializable {
             }
         }
         return flag;
+    }
+
+    private boolean validarProyectoDuplicado(){
+        ProyectoDAO proyectoDAO = new ProyectoDAO();
+        boolean bandera;
+        String nombrePresentador = txtNombrePresentador.getText();
+        String tipoPryecto = boxTipoProyecto.getValue();
+        String[] licenciatura = boxCarrera.getValue().split(" ");
+        bandera = proyectoDAO.buscarProyectoRepetidoDePresentador(nombrePresentador, tipoPryecto, licenciatura[0]);
+        if (bandera) {
+            avisos("Proyecto duplicado", "Ya tienes registrado un proyecto en nuestro sistema " +
+                    "puedes consultarlo en la seccion de <<consultar proyectos>>", Alert.AlertType.INFORMATION);
+        }
+        return bandera;
+
     }
 
     private void avisos(String titulo, String mensaje, Alert.AlertType alertType){

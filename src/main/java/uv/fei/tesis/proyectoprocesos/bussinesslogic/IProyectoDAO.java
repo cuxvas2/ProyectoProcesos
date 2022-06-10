@@ -13,7 +13,9 @@ public interface IProyectoDAO {
     public  List<String> buscarLicenciaturas();
     public int buscarIdLicenciatura(String licenciatura);
 
-    Proyecto buscarProyectoTipoCarreraPorId(int buscarId);
+    public Proyecto buscarProyectoTipoCarreraPorId(int buscarId);
+
+    public boolean buscarProyectoRepetidoDePresentador(String nombrePresentador, String nombreProyeto, String nivel);
 
     List<Proyecto> buscarProyectoPorFechaYCarrera(String añoEnQueSeTitulo, String mesEnQueSeTitulo, String nombreCarrera);
 }
