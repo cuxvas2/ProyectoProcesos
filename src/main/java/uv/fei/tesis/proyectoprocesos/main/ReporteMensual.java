@@ -149,7 +149,4 @@ public class ReporteMensual implements Initializable {
         Utilidad.regresarMenuPrincipal(event);
     }
 
-    public void clicRegresar(ActionEvent event) throws IOException {
-        Utilidad.regresarMenuPrincipal(event);
-    }
 }
