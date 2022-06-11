@@ -33,6 +33,6 @@
          </cursor></Button>
    </children>
     <stylesheets>
-        <URL value="@style/Style.css"/>
+        <URL value="@style/btnBG.css"/>
     </stylesheets>
 </AnchorPane>
