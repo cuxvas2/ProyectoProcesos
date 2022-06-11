@@ -11,7 +11,7 @@ public class MenuPrincipal {
     }
 
     public void clicDetallesDeProyecto(ActionEvent actionEvent) throws IOException {
-        Utilidad.abrirVentana(actionEvent,"GUIDetalleDeProyecto.fxml","Detalle proyecto");
+        Utilidad.abrirVentana(actionEvent,"ListaDEProyectos.fxml","Detalle proyecto");
 
     }
 

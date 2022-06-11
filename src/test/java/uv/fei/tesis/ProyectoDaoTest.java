@@ -62,4 +62,8 @@ public class ProyectoDaoTest {
         int id = 1;
         assertEquals(proyectoDAO.buscarIdLicenciatura("Estadistica"),id);
     }
+    @Test
+    public void obtenerProyectosDao(){
+        System.out.println(proyectoDAO.obtenerProyectos());
+    }
 }
