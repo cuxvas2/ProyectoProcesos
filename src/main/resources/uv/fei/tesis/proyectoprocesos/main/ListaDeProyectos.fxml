@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="400.0" prefWidth="929.0" style="-fx-background-color: #7900FF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uv.fei.tesis.proyectoprocesos.main.ListaDeProyectos">
+   <children>
+      <TableView fx:id="tblProyecto" layoutX="275.0" layoutY="100.0" onMouseClicked="#seleccionarProyecto" prefHeight="200.0" prefWidth="378.0" style="-fx-background-color: #CFFFDC; -fx-background-radius: 20;">
+        <columns>
+          <TableColumn fx:id="colNombreProyecto" prefWidth="124.800048828125" style="-fx-background-color: #93FFD8;" text="Nombre de proyecto" />
+            <TableColumn fx:id="colDirector" minWidth="5.5999755859375" prefWidth="132.0" style="-fx-background-color: #548CFF;" text="Director" />
+            <TableColumn fx:id="colExponente" minWidth="5.5999755859375" prefWidth="132.0" style="-fx-background-color: #93FFD8;" text="Exponente" />
+        </columns>
+      </TableView>
+      <Button layoutX="742.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicRegresar" style="-fx-background-radius: 20;" text="Regresar">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="btnDetalleDeProyecto" layoutX="593.0" layoutY="339.0" mnemonicParsing="false" onAction="#clicDetalleDeProyecto" style="-fx-background-radius: 20;" text="Detalle de proyecto">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+    <stylesheets>
+        <URL value="@style/Style.css"/>
+    </stylesheets>
+</AnchorPane>

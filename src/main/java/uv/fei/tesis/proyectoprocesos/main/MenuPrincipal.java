@@ -6,12 +6,12 @@ import java.io.IOException;
 
 public class MenuPrincipal {
     public void clicRegistrarProyecto(ActionEvent actionEvent) throws IOException {
-        Utilidad.abrirVentana(actionEvent,"RegistarProyecto.fxml","Registrar proyecto");
+        Utilidad.abrirVentana(actionEvent,"RegistrarProyecto.fxml","Registrar proyecto");
 
     }
 
     public void clicDetallesDeProyecto(ActionEvent actionEvent) throws IOException {
-        Utilidad.abrirVentana(actionEvent,"GUIDetalleDeProyecto.fxml","Detalle proyecto");
+        Utilidad.abrirVentana(actionEvent,"ListaDEProyectos.fxml","Detalle proyecto");
 
     }
 

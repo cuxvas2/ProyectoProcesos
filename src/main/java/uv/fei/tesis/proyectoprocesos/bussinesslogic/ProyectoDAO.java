@@ -44,7 +44,7 @@ public class ProyectoDAO implements IProyectoDAO{
     @Override
     public boolean eliminarProyecto(int id) {
         boolean flag=false;
-            DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
         try (Connection connection=dataBaseConnection.getConnection()){
             String query="DELETE FROM proyecto WHERE id=?";
             PreparedStatement statement=connection.prepareStatement(query);
@@ -86,7 +86,6 @@ public class ProyectoDAO implements IProyectoDAO{
     }
     @Override
     public List<Proyecto> buscarProyectoPorFechaYCarrera(String añoEnQueSeTitulo,String mesEnQueSeTitulo, String nombreCarrera) {
-
         DataBaseConnection dataBaseConnection = new DataBaseConnection();
         List<Proyecto> proyectos = new ArrayList<>();
         try (Connection connection = dataBaseConnection.getConnection()) {
@@ -103,6 +102,24 @@ public class ProyectoDAO implements IProyectoDAO{
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 proyectos.add(getProyecto(resultSet));
+            }
+        } catch (SQLException ex) {
+            LOG.warn(ProyectoDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return proyectos;
+    }
+    @Override
+    public List<Proyecto> obtenerProyectos() {
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        List<Proyecto> proyectos = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select p.*, tp.tipo, c.nombreCarrera from proyecto p, tipo_proyecto tp, carrera c where tp.id = p.idTipoProyecto and c.id = p.idcarrera";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                proyectos.add(getProyectoTipoCarrera(resultSet));
             }
         } catch (SQLException ex) {
             LOG.warn(ProyectoDAO.class.getName(), ex);
@@ -270,6 +287,31 @@ public class ProyectoDAO implements IProyectoDAO{
         }
         return proyecto;
     }
+
+    @Override
+    public boolean buscarProyectoRepetidoDePresentador(String nombrePresentador, String nombreProyeto, String nivel) {
+        boolean resultado = false;
+        DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        try (Connection connection = dataBaseConnection.getConnection()) {
+            String query = "select p.id, p.nombreExponente, nombreCarrera from proyecto p inner join carrera c " +
+                    "on c.id = p.idCarrera where (nombreExponente = ? and nombreCarrera like ? ) or (nombreDeProyecto = ? ) ";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nombrePresentador);
+            statement.setString(2,nivel + "%");
+            statement.setString(3,nombreProyeto);
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(resultSet.next() + " - >");
+            if (!resultSet.first()) {
+                resultado = true;
+            }
+        } catch (SQLException ex) {
+            LOG.warn(UsuarioDAO.class.getName(), ex);
+        } finally {
+            dataBaseConnection.cerrarConexion();
+        }
+        return resultado;
+    }
+
     private Proyecto getProyectoTipoCarrera(ResultSet resultSet) {
         Proyecto proyecto = new Proyecto();
         int id = 0;

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import java.net.URL?>
 <VBox alignment="CENTER" prefHeight="468.0" prefWidth="756.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="uv.fei.tesis.proyectoprocesos.main.RegistrarProyectoController">
    <children>
@@ -170,4 +171,7 @@
          </children>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@style/Style.css"/>
+   </stylesheets>
 </VBox>
