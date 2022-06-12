@@ -6,8 +6,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.net.URL?>
+<AnchorPane fx:id="panel" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #CFFFDC;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="29.0" layoutY="24.0" prefHeight="313.0" prefWidth="494.0" AnchorPane.topAnchor="24.0">
         <columnConstraints>
@@ -43,6 +45,12 @@
             <Label fx:id="lblCarrera" layoutX="10.0" layoutY="289.0" text="Carrera" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <Button layoutX="418.0" layoutY="353.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar" />
+      <Button layoutX="418.0" layoutY="353.0" mnemonicParsing="false" onAction="#clicRegresar" text="Regresar">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font></Button>
    </children>
+    <stylesheets>
+        <URL value="@style/Style.css"/>
+    </stylesheets>
 </AnchorPane>
