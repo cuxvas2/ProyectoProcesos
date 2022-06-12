@@ -282,10 +282,9 @@ public class ProyectoDAO implements IProyectoDAO{
             statement.setString(2,nivel + "%");
             statement.setString(3,nombreProyeto);
             ResultSet resultSet = statement.executeQuery();
-            System.out.println(resultSet.next() + " - >");
-            if (!resultSet.first()) {
-                resultado = true;
-            }
+            resultado = resultSet.next();
+            System.out.println(resultado + " - >"); //Borrar
+
         } catch (SQLException ex) {
             LOG.warn(UsuarioDAO.class.getName(), ex);
         } finally {

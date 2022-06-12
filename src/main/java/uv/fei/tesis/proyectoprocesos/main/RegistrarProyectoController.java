@@ -112,9 +112,9 @@ public class RegistrarProyectoController implements Initializable {
         ProyectoDAO proyectoDAO = new ProyectoDAO();
         boolean bandera;
         String nombrePresentador = txtNombrePresentador.getText();
-        String tipoPryecto = boxTipoProyecto.getValue();
+        String nombreProyecto = txtNombreDeProyecto.getText();
         String[] licenciatura = boxCarrera.getValue().split(" ");
-        bandera = proyectoDAO.buscarProyectoRepetidoDePresentador(nombrePresentador, tipoPryecto, licenciatura[0]);
+        bandera = proyectoDAO.buscarProyectoRepetidoDePresentador(nombrePresentador, nombreProyecto, licenciatura[0]);
         if (bandera) {
             avisos("Proyecto duplicado", "Ya tienes registrado un proyecto en nuestro sistema " +
                     "puedes consultarlo en la seccion de <<consultar proyectos>>", Alert.AlertType.INFORMATION);

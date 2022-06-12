@@ -62,4 +62,9 @@ public class ProyectoDaoTest {
         int id = 1;
         assertEquals(proyectoDAO.buscarIdLicenciatura("Estadistica"),id);
     }
+
+    @Test
+    public void buscarProyectoRepetidoDePresentador() {
+        assertTrue(proyectoDAO.buscarProyectoRepetidoDePresentador("hgjko","Seleccion","Lic"));
+    }
 }
